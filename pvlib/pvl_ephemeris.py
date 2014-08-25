@@ -31,7 +31,7 @@ def pvl_ephemeris(Time,Location,pressure=101325,temperature=12):
   pressure : float or DataFrame
           Ambient pressure (Pascals)
 
-  tempreature: float or DataFrame
+  temperature: float or DataFrame
           Ambient temperature (C)
           
   Returns
