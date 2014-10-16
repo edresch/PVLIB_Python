@@ -344,7 +344,7 @@ def disc(GHI,SunZen,Time,pressure=101325):
           'pressure':('num','default','default=101325','x>=0'),
           }
 
-  var=pvt.Parse(Vars,Expect)
+  var=pvl_tools.Parse(Vars,Expect)
 
   #create a temporary dataframe to house masked values, initially filled with NaN
   temp=pd.DataFrame(index=var.Time,columns=['A','B','C'])
