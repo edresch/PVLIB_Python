@@ -198,6 +198,7 @@ def parsedate(ymd, hour):
     offset_datetime = '{} {}:00'.format(ymd, offset_hour)
     offset_date = dateutil.parser.parse(offset_datetime)
     true_date = offset_date + dateutil.relativedelta.relativedelta(hours=1)
+    true_date = true_date.replace(year=1987) #set all dates to a common year, otherwise it will jump around
     return true_date
 
 
