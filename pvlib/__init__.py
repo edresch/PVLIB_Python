@@ -9,6 +9,7 @@ from . import location
 from . import pvl_tools
 from . import solarposition
 from . import tmy
+from . import pvsystem
 
 # '''
 # Irradiance and atmosperhic functions
