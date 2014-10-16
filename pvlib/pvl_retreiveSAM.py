@@ -106,7 +106,7 @@ def read_url_to_pandas(url):
 	df=pd.read_csv(data,index_col=0)
 	parsedindex=[]
 	for index in df.index:
-	    parsedindex.append(index.replace(' ','_').replace('-','_').replace('.','_').replace('(','_').replace(')','_').replace('[','_').replace(']','_').replace(':','_'))
+	    parsedindex.append(index.replace(' ','_').replace('-','_').replace('.','_').replace('(','_').replace(')','_').replace('[','_').replace(']','_').replace(':','_').replace('/','_'))
         
 	df.index=parsedindex
 	df=df.transpose()
@@ -117,7 +117,7 @@ def read_relative_to_pandas(FileLoc):
 	df=pd.read_csv(FileLoc,index_col=0)
 	parsedindex=[]
 	for index in df.index:
-	    parsedindex.append(index.replace(' ','_').replace('-','_').replace('.','_').replace('(','_').replace(')','_').replace('[','_').replace(']','_').replace(':','_'))
+	    parsedindex.append(index.replace(' ','_').replace('-','_').replace('.','_').replace('(','_').replace(')','_').replace('[','_').replace(']','_').replace(':','_').replace('/','_'))
         
 	df.index=parsedindex
 	df=df.transpose()
