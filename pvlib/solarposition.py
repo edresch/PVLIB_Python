@@ -110,6 +110,7 @@ def spa(time, location, raw_spa_output=False):
                        elevation=location.altitude))
     
     spa_df = pd.DataFrame(spa_out, index=time_utc).tz_convert(location.tz)
+    spa_df['azimuth']=spa_df['azimuth']-180
     
     if raw_spa_output:
         return spa_df
@@ -187,11 +188,13 @@ def pyephem(time, location, pressure=101325, temperature=12):
     
     sun_coords['elevation'] = alts
     sun_coords['azimuth'] = azis
+
     
     # convert to degrees. add zenith
     sun_coords = np.rad2deg(sun_coords)
     sun_coords['apparent_zenith'] = 90 - sun_coords['apparent_elevation']
     sun_coords['zenith'] = 90 - sun_coords['elevation']
+    sun_coords['azimuth']=sun_coords['azimuth']-180
     
     try:
         return sun_coords.tz_convert(location.tz)
