@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="PV LIB 1.0 documentation" href="../../index.html" />
-    <link rel="up" title="pvlib" href="../pvlib.html" /> 
+    <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,9 +33,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="../../index.html">PV LIB 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../pvlib.html" accesskey="U">pvlib</a> &raquo;</li> 
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -233,7 +238,8 @@
 
                     <span class="c">#Excecute proper logical operations if syntax matches regex</span>
                     <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="n">string</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-
+                        <span class="n">eflag</span><span class="o">=</span><span class="bp">False</span> 
+                        
                         <span class="n">lambdastring</span><span class="o">=</span><span class="s">&#39;lambda x:&#39;</span><span class="o">+</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="n">string</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
                         <span class="c">#check df elements</span>
@@ -247,11 +253,31 @@
                             <span class="k">except</span><span class="p">:</span>
                                 <span class="n">pvl_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Optional value &quot;&#39;</span><span class="o">+</span><span class="n">arg</span><span class="o">+</span><span class="s">&#39;&quot; not input&#39;&quot;&quot;</span><span class="p">)</span>
                                 <span class="k">continue</span>
-                            <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])):</span> <span class="c">#check its logical constraint</span>
-                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Error: Optional input &quot;&#39;</span><span class="o">+</span><span class="n">arg</span><span class="o">+</span><span class="s">&#39;&quot; fails on logical test &quot;&#39;</span><span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="n">string</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;&quot;&#39;</span><span class="p">)</span>	
+                            <span class="k">try</span><span class="p">:</span>    
+                                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])])</span><span class="o">.</span><span class="n">all</span><span class="p">()):</span> <span class="c">#ignore NAN entries</span>
+                                    <span class="n">eflag</span><span class="o">=</span><span class="bp">True</span>
+                                    
+                            <span class="k">except</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])):</span>
+                                    <span class="n">eflag</span><span class="o">=</span><span class="bp">True</span>
+                                    
+                            
+
                         <span class="c">#check all other contraints</span>
-                        <span class="k">elif</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()):</span>
+                        
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">try</span><span class="p">:</span>    
+                                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])])</span><span class="o">.</span><span class="n">all</span><span class="p">()):</span> <span class="c">#ignore NAN entries</span>
+                                    <span class="n">eflag</span><span class="o">=</span><span class="bp">True</span>
+                                    
+                            <span class="k">except</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">lambdastring</span><span class="p">)(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">arg</span><span class="p">])):</span> 
+                                    <span class="n">eflag</span><span class="o">=</span><span class="bp">True</span>
+                                    
+
+                        <span class="k">if</span> <span class="n">eflag</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
                             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Error: Numeric input &quot;&#39;</span><span class="o">+</span><span class="n">arg</span><span class="o">+</span><span class="s">&#39; &quot; fails on logical test &quot; &#39;</span><span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="n">string</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;&quot;&#39;</span><span class="p">)</span>
+
                     <span class="c">#Check if any string logicals are bypassed due to poor formatting</span>
                         
                     <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">reglogical</span><span class="p">,</span><span class="n">string</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>		
@@ -360,14 +386,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="../../index.html">PV LIB 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../pvlib.html" >pvlib</a> &raquo;</li> 
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Sandia National Labs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pvlib.pvsystem.I_from_V &mdash; PV LIB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PV LIB 1.0 documentation" href="../index.html" />
+    <link rel="next" title="pvlib.pvsystem.snlinverter" href="pvlib.pvsystem.snlinverter.html" />
+    <link rel="prev" title="pvlib.pvsystem.Voc_optfcn" href="pvlib.pvsystem.Voc_optfcn.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pvlib.pvsystem.snlinverter.html" title="pvlib.pvsystem.snlinverter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pvlib.pvsystem.Voc_optfcn.html" title="pvlib.pvsystem.Voc_optfcn"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">PV LIB 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pvlib.pvsystem.Voc_optfcn.html"
+                        title="previous chapter">pvlib.pvsystem.Voc_optfcn</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pvlib.pvsystem.snlinverter.html"
+                        title="next chapter">pvlib.pvsystem.snlinverter</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/stubs/pvlib.pvsystem.I_from_V.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pvlib-pvsystem-i-from-v">
+<h1>pvlib.pvsystem.I_from_V<a class="headerlink" href="#pvlib-pvsystem-i-from-v" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pvlib.pvsystem.I_from_V">
+<tt class="descclassname">pvlib.pvsystem.</tt><tt class="descname">I_from_V</tt><big>(</big><em>Rsh</em>, <em>Rs</em>, <em>nNsVth</em>, <em>V</em>, <em>I0</em>, <em>IL</em><big>)</big><a class="reference internal" href="../_modules/pvlib/pvsystem.html#I_from_V"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pvlib.pvsystem.I_from_V" title="Permalink to this definition">¶</a></dt>
+<dd><p># calculates I from V per Eq 2 Jain and Kapoor 2004
+# uses Lambert W implemented in wapr_vec.m
+# Rsh, nVth, V, I0, IL can all be DataFrames
+# Rs can be a DataFrame, but should be a scalar</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pvlib.pvsystem.snlinverter.html" title="pvlib.pvsystem.snlinverter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pvlib.pvsystem.Voc_optfcn.html" title="pvlib.pvsystem.Voc_optfcn"
+             >previous</a> |</li>
+        <li><a href="../index.html">PV LIB 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Sandia National Labs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

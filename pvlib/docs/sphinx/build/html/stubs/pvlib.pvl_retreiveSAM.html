@@ -23,9 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="PV LIB 1.0 documentation" href="../index.html" />
-    <link rel="next" title="pvlib.pvl_sapm" href="pvlib.pvl_sapm.html" />
-    <link rel="prev" title="pvlib.pvl_calcparams_desoto" href="pvlib.pvl_calcparams_desoto.html" /> 
+    <link rel="top" title="PV LIB 1.0 documentation" href="../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,11 +33,11 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="pvlib.pvl_sapm.html" title="pvlib.pvl_sapm"
-             accesskey="N">next</a> |</li>
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
-          <a href="pvlib.pvl_calcparams_desoto.html" title="pvlib.pvl_calcparams_desoto"
-             accesskey="P">previous</a> |</li>
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="../index.html">PV LIB 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
@@ -48,12 +46,6 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
             </a></p>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pvlib.pvl_calcparams_desoto.html"
-                        title="previous chapter">pvlib.pvl_calcparams_desoto</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pvlib.pvl_sapm.html"
-                        title="next chapter">pvlib.pvl_sapm</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/stubs/pvlib.pvl_retreiveSAM.txt"
@@ -82,79 +74,6 @@
             
   <div class="section" id="pvlib-pvl-retreivesam">
 <h1>pvlib.pvl_retreiveSAM<a class="headerlink" href="#pvlib-pvl-retreivesam" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="pvlib.pvl_retreiveSAM">
-<tt class="descclassname">pvlib.</tt><tt class="descname">pvl_retreiveSAM</tt><big>(</big><em>name</em>, <em>FileLoc='none'</em><big>)</big><a class="headerlink" href="#pvlib.pvl_retreiveSAM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retreive lastest module and inverter info from SAM website</p>
-<p>PVL_RETREIVESAM Retreive lastest module and inverter info from SAM website.
-This function will retreive either:</p>
-<blockquote>
-<div><ul class="simple">
-<li>CEC module database</li>
-<li>Sandia Module database</li>
-<li>Sandia Inverter database</li>
-</ul>
-</div></blockquote>
-<p>and export it as a pandas dataframe</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name: String</strong> :</p>
-<blockquote>
-<div><p>Name can be one of:</p>
-<ul class="simple">
-<li>&#8216;CECMod&#8217;- returns the CEC module database</li>
-<li>&#8216;SandiaInverter- returns the Sandia Inverter database</li>
-<li>&#8216;SandiaMod&#8217;- returns the Sandia Module database</li>
-</ul>
-</div></blockquote>
-<p><strong>FileLoc: String</strong> :</p>
-<blockquote>
-<div><p>Absolute path to the location of local versions of the SAM file. 
-If FileLoc is specified, the latest versions of the SAM database will
-not be downloaded. The selected file must be in .csv format.</p>
-<p>If set to &#8216;select&#8217;, a dialogue will open allowing the suer to navigate 
-to the appropriate page.</p>
-</div></blockquote>
-<p><strong>Returns</strong> :</p>
-<p><strong>&#8212;&#8212;-</strong> :</p>
-<p><strong>df: DataFrame</strong> :</p>
-<blockquote class="last">
-<div><p>A DataFrame containing all the elements of the desired database. 
-Each column representa a module or inverter, and a specific dataset
-can be retreived by the command</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">module_or_inverter_name</span>
-</pre></div>
-</div>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Invdb</span><span class="o">=</span><span class="n">SAM</span><span class="o">.</span><span class="n">pvl_retreiveSAM</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;SandiaInverter&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inverter</span><span class="o">=</span><span class="n">Invdb</span><span class="o">.</span><span class="n">AE_Solar_Energy__AE6_0__277V__277V__CEC_2012_</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inverter</span>    
-<span class="go">Vac           277.000000</span>
-<span class="go">Paco         6000.000000</span>
-<span class="go">Pdco         6165.670000</span>
-<span class="go">Vdco          361.123000</span>
-<span class="go">Pso            36.792300</span>
-<span class="go">C0             -0.000002</span>
-<span class="go">C1             -0.000047</span>
-<span class="go">C2             -0.001861</span>
-<span class="go">C3              0.000721</span>
-<span class="go">Pnt             0.070000</span>
-<span class="go">Vdcmax        600.000000</span>
-<span class="go">Idcmax         32.000000</span>
-<span class="go">Mppt_low      200.000000</span>
-<span class="go">Mppt_high     500.000000</span>
-<span class="go">Name: AE_Solar_Energy__AE6_0__277V__277V__CEC_2012_, dtype: float64</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </div>
 
 
@@ -170,17 +89,17 @@ can be retreived by the command</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="pvlib.pvl_sapm.html" title="pvlib.pvl_sapm"
-             >next</a> |</li>
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
-          <a href="pvlib.pvl_calcparams_desoto.html" title="pvlib.pvl_calcparams_desoto"
-             >previous</a> |</li>
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li><a href="../index.html">PV LIB 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Sandia National Labs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>
