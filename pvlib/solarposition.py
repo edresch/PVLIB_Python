@@ -110,7 +110,6 @@ def spa(time, location, raw_spa_output=False):
                        elevation=location.altitude))
     
     spa_df = pd.DataFrame(spa_out, index=time_utc).tz_convert(location.tz)
-    spa_df['azimuth']=spa_df['azimuth']-180
     
     if raw_spa_output:
         return spa_df
@@ -194,7 +193,6 @@ def pyephem(time, location, pressure=101325, temperature=12):
     sun_coords = np.rad2deg(sun_coords)
     sun_coords['apparent_zenith'] = 90 - sun_coords['apparent_elevation']
     sun_coords['zenith'] = 90 - sun_coords['elevation']
-    sun_coords['azimuth']=sun_coords['azimuth']-180
     
     try:
         return sun_coords.tz_convert(location.tz)
@@ -370,7 +368,6 @@ def ephemeris(time, location, pressure=101325, temperature=12):
     ApparentSunEl = SunEl + Refract
 
     DFOut = pd.DataFrame({'elevation':SunEl}, index=time)
-    DFOut['azimuth'] = SunAz-180  #Changed RA Feb 18,2014 to match Duffe
     DFOut['zenith'] = SunZen
     DFOut['apparent_elevation'] = ApparentSunEl
     DFOut['apparent_zenith'] = 90 - ApparentSunEl

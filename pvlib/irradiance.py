@@ -110,7 +110,7 @@ def globalinplane(SurfTilt,SurfAz,AOI,DNI,In_Plane_SkyDiffuse, GR):
   '''
   Vars=locals()
   Expect={'SurfTilt':('num','x>=0'),
-      'SurfAz':('num','x>=-180','x<=180'),
+      'SurfAz':('num','x>=0'),
       'AOI':('x>=0'),
       'DNI':('x>=0'),
       'In_Plane_SkyDiffuse':('x>=0'),
@@ -284,7 +284,7 @@ def haydavies1980(SurfTilt,SurfAz,DHI,DNI,HExtra,SunZen,SunAz):
               'DNI':('x>=0'),
               'HExtra':('x>=0'),
               'SunZen':('x>=0'),
-              'SunAz':('x>=-180'),
+              'SunAz':('x>0'),
               }
     var=pvl_tools.Parse(Vars,Expect)
 
@@ -517,7 +517,7 @@ def klucher1979(SurfTilt,SurfAz,DHI,GHI,SunZen,SunAz):
             'DHI':('x>=0'),
             'GHI':('x>=0'),
             'SunZen':('x>=0'),
-            'SunAz':('x>=-180')
+            'SunAz':('x>=0')
             }
 
     var=pvl_tools.Parse(Vars,Expect)
@@ -661,7 +661,7 @@ def perez(SurfTilt, SurfAz, DHI, DNI, HExtra, SunZen, SunAz, AM,modelt='allsites
       'DNI':('x>=0'),
       'HExtra':('x>=0'),
       'SunZen':('x>=0'),
-      'SunAz':('x>=-180'),
+      'SunAz':('x>=0'),
       'AM':('x>=0'),
       'modelt': ('default','default=allsitescomposite1990')}
 
@@ -1009,7 +1009,7 @@ def reindl1990(SurfTilt,SurfAz,DHI,DNI,GHI,HExtra,SunZen,SunAz):
       'GHI':('num','x>=0'),
       'HExtra':('num','x>=0'),
       'SunZen':('num','x>=0'),
-      'SunAz':('num','x>=-180'),
+      'SunAz':('num','x>=0'),
         }
 
   var=pvl_tools.Parse(Vars,Expect)

@@ -1,11 +1,12 @@
 import numpy as np
 import pvl_tools
-import scipy
+from scipy import io
 import os
+import pkg_resources
 #Rewuired for clearsky_inechen
 from atmosphere import alt2pres,relativeairmass,absoluteairmass
 from irradiance import extraradiation
-from solarposition import ephemeris
+import solarposition
 import pandas as pd
 
 
@@ -190,9 +191,10 @@ def clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
 
     I0=extraradiation(var.Time.dayofyear)
 
-    __,__,ApparentSunElevation,__,__=ephemeris(var.Time,var.Location,alt2pres(var.Location.altitude)) # nargout=4
+    spa_out=solarposition.get_solarposition(time=var.Time,location=var.Location,method='spa')
 
-    ApparentZenith=90 - ApparentSunElevation
+    ApparentZenith=spa_out['zenith']
+
     ApparentZenith[ApparentZenith>=90]=90
 
 
@@ -208,7 +210,7 @@ def clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
         # following: LT = LinkeTurbidity(LatitudeIndex, LongitudeIndex, month).  Note that the numbers within the matrix are 20 * Linke
         # Turbidity, so divide the number from the file by 20 to get the
         # turbidity.
-        mat = scipy.io.loadmat('LinkeTurbidities.mat')
+        mat = io.loadmat(pkg_resources.resource_filename('pvlib', 'data/LinkeTurbidities.mat'))
         LinkeTurbidity=mat['LinkeTurbidity']
         LatitudeIndex=np.round_(LinearlyScale(Location.latitude,90,- 90,1,2160))
         LongitudeIndex=np.round_(LinearlyScale(Location.longitude,- 180,180,1,4320))
@@ -264,7 +266,8 @@ def clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
 
     ClearSkyDHI=ClearSkyGHI - ClearSkyDNI*(pvl_tools.cosd(ApparentZenith))
 
-    return ClearSkyGHI,ClearSkyDNI,ClearSkyDHI,BncI
+    return pd.DataFrame({'ClearSkyDHI':ClearSkyDHI,'ClearSkyDNI':ClearSkyDNI,'ClearSkyGHI':ClearSkyGHI})
+
 
 
 def LinearlyScale(inputmatrix,inputmin,inputmax,outputmin,outputmax):
@@ -361,6 +364,7 @@ def disc(GHI,SunZen,Time,pressure=101325):
   AM=1.0 / (np.cos(np.radians(Ztemp)) + 0.15*(((93.885 - Ztemp) ** (- 1.253))))*(var.pressure) / 101325
   Kt=var.GHI / (I0h)
   Kt[Kt < 0]=0
+  Kt[Kt > 2]=np.NaN
   temp.A[Kt > 0.6]=- 5.743 + 21.77*(Kt[Kt > 0.6]) - 27.49*(Kt[Kt > 0.6] ** 2) + 11.56*(Kt[Kt > 0.6] ** 3)
   temp.B[Kt > 0.6]=41.4 - 118.5*(Kt[Kt > 0.6]) + 66.05*(Kt[Kt > 0.6] ** 2) + 31.9*(Kt[Kt > 0.6] ** 3)
   temp.C[Kt > 0.6]=- 47.01 + 184.2*(Kt[Kt > 0.6]) - 222.0 * Kt[Kt > 0.6] ** 2 + 73.81*(Kt[Kt > 0.6] ** 3)
