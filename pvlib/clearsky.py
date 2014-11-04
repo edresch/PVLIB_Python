@@ -378,9 +378,9 @@ def disc(GHI,SunZen,Time,pressure=101325):
   Kn=Knc - delKn
   DNI=(Kn)*(I0)
 
-  # DNI[var.SunZen > 87]=0
-  # DNI[var.GHI < 1]=0
-  # DNI[DNI < 0]=0
+  DNI[var.SunZen > 87]=np.NaN
+  DNI[var.GHI < 1]=np.NaN
+  DNI[DNI < 0]=np.NaN
 
   DFOut=pd.DataFrame({'DNI_gen_DISC':DNI})
 
@@ -388,5 +388,5 @@ def disc(GHI,SunZen,Time,pressure=101325):
   DFOut['AM']=AM
   DFOut['Ztemp']=Ztemp
 
-  return DFOut
+  return DFOut, temp, I0, Knc, delKn
   
