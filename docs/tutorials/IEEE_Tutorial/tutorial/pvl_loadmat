@@ -1,0 +1,30 @@
+from datetime import datetime,timedelta
+def parse(yr, doy, hr, min, sec):
+    dt = datetime(yr - 1, 12, 31)
+    delta = timedelta(days=doy, hours=hr,
+                      minutes=min, seconds=sec)
+    return dt + delta
+
+def importdict(Dict):
+    Dict.pop('__globals__')
+    Dict.pop('__header__')
+    Dict.pop('__version__')
+    DF=pd.DataFrame(Dict[Dict.keys()[1]])
+    for item in Dict:
+        DF[item]=Dict[item]
+    return DF
+
+# Date parser for column date inputs
+
+date=[]
+for pos in range(Weather.shape[0]):
+    date.append(parse(Weather.Year.astype(int).values[pos],
+          Weather.Days.astype(int).values[pos],
+          Weather.Hours.astype(int).values[pos],
+          Weather.Minutes.astype(int).values[pos],
+          Weather.Seconds.astype(int).values[pos]))
+
+Weather.index=pd.to_datetime(date)
+System.index=pd.to_datetime(date)
+Data=Weather.join(System,rsuffix='_sys')
+
