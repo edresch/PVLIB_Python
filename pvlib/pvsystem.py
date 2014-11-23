@@ -637,7 +637,7 @@ def getaoi(SurfTilt,SurfAz,SunZen,SunAz):
 
   Vars=locals()
   Expect={'SurfTilt':('num','x>=0'),
-        'SurfAz':('num','x>=-180','x<=180'),
+        'SurfAz':('num','x>0'),
         'SunZen':('x>=0'),
         'SunAz':('x>=0')
   }
