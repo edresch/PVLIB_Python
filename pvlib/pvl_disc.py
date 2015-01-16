@@ -94,9 +94,9 @@ def pvl_disc(GHI,SunZen,Time,pressure=101325):
   temp.A[Kt > 0.6]=- 5.743 + 21.77*(Kt[Kt > 0.6]) - 27.49*(Kt[Kt > 0.6] ** 2) + 11.56*(Kt[Kt > 0.6] ** 3)
   temp.B[Kt > 0.6]=41.4 - 118.5*(Kt[Kt > 0.6]) + 66.05*(Kt[Kt > 0.6] ** 2) + 31.9*(Kt[Kt > 0.6] ** 3)
   temp.C[Kt > 0.6]=- 47.01 + 184.2*(Kt[Kt > 0.6]) - 222.0 * Kt[Kt > 0.6] ** 2 + 73.81*(Kt[Kt > 0.6] ** 3)
-  temp.A[(Kt <= 0.6-1)]=0.512 - 1.56*(Kt[(Kt <= 0.6-1)]) + 2.286*(Kt[(Kt <= 0.6-1)] ** 2) - 2.222*(Kt[(Kt <= 0.6-1)] ** 3)
-  temp.B[(Kt <= 0.6-1)]=0.37 + 0.962*(Kt[(Kt <= 0.6-1)])
-  temp.C[(Kt <= 0.6-1)]=- 0.28 + 0.932*(Kt[(Kt <= 0.6-1)]) - 2.048*(Kt[(Kt <= 0.6-1)] ** 2)
+  temp.A[(Kt <= 0.6)]=0.512 - 1.56*(Kt[(Kt <= 0.6)]) + 2.286*(Kt[(Kt <= 0.6)] ** 2) - 2.222*(Kt[(Kt <= 0.6)] ** 3)
+  temp.B[(Kt <= 0.6)]=0.37 + 0.962*(Kt[(Kt <= 0.6)])
+  temp.C[(Kt <= 0.6)]=- 0.28 + 0.932*(Kt[(Kt <= 0.6)]) - 2.048*(Kt[(Kt <= 0.6)] ** 2)
   #return to numeric after masking operations 
   temp=temp.astype(float)
   delKn=temp.A + temp.B*((temp.C*(AM)).apply(np.exp))
