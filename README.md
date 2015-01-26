@@ -16,11 +16,11 @@ After cloning the directory there are two set-up steps to configure PVLIB for yo
 
 *In order to create a local compile of the NREL SPA algorithm, Navigate to pvlib/spa_c_files and run the following command in that folder: 
 
-''python setup.py build_ext --inplace''
+		python setup.py build_ext --inplace
 
 *To install the required dependancy, pyepehem, open a terminal anywhere and run the following command
 
-''pip install pyephem''
+		pip install pyephem
 
 
 
