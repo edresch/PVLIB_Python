@@ -1,5 +1,5 @@
 include *.txt
-recursive-include pvlpy *.csv
-recursive-include pvlpy *.tm2
+recursive-include pvlib *.csv
+recursive-include pvlib *.tm2
 
 recursive-include docs *.txt
