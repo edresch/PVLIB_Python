@@ -92,11 +92,11 @@ def pvl_systemdef(TMYmeta,SurfTilt, SurfAz,Albedo,SeriesModules,ParallelModules)
 			'Albedo':var.Albedo,
 			'SeriesModules':var.SeriesModules,
 			'ParallelModules':var.ParallelModules,
-			'Lat':var.TMYmeta.latitude,
-			'Long':var.TMYmeta.longitude,
-			'TZ':var.TMYmeta.TZ,
-			'name':var.TMYmeta.Name,
-			'altitude':var.TMYmeta.altitude}
+			'latitude':var.TMYmeta['latitude'],
+			'longitude':var.TMYmeta['longitude'],
+			'TZ':var.TMYmeta['TZ'],
+			'name':var.TMYmeta['Name'],
+			'altitude':var.TMYmeta['altitude']}
 
-	return pvl_tools.repack(system)
+	return system
 

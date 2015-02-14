@@ -30,22 +30,22 @@ def pvl_clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
 
         A timezone aware pandas dataframe index.
 
-    Location : struct
+    Location : dict
 
-        Location.latitude
+        latitude
             vector or scalar latitude in decimal degrees (positive is
             northern hemisphere)
 
-        Location.longitude
+        longitude
             vector or scalar longitude in decimal degrees (positive is
             east of prime meridian)
 
-        Location.altitude
+        altitude
             an optional component of the Location struct, not
             used in the ephemeris code directly, but it may be used to calculate
             standard site pressure (see pvl_alt2pres function)
 
-        location.TZ
+        TZ
             Time Zone offset from UTC
 
     Other Parameters
@@ -134,7 +134,7 @@ def pvl_clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
 
     I0=pvl_extraradiation.pvl_extraradiation(var.Time.dayofyear)
 
-    __,__,ApparentSunElevation,__,__=pvl_ephemeris.pvl_ephemeris(var.Time,var.Location,pvl_alt2pres.pvl_alt2pres(var.Location.altitude)) # nargout=4
+    __,__,ApparentSunElevation,__,__=pvl_ephemeris.pvl_ephemeris(var.Time,var.Location,pvl_alt2pres.pvl_alt2pres(var.Location['altitude'])) # nargout=4
 
     ApparentZenith=90 - ApparentSunElevation
     ApparentZenith[ApparentZenith>=90]=90
@@ -154,8 +154,8 @@ def pvl_clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
         # turbidity.
         mat = scipy.io.loadmat('LinkeTurbidities.mat')
         LinkeTurbidity=mat['LinkeTurbidity']
-        LatitudeIndex=np.round_(LinearlyScale(Location.latitude,90,- 90,1,2160))
-        LongitudeIndex=np.round_(LinearlyScale(Location.longitude,- 180,180,1,4320))
+        LatitudeIndex=np.round_(LinearlyScale(Location['latitude'],90,- 90,1,2160))
+        LongitudeIndex=np.round_(LinearlyScale(Location['longitude'],- 180,180,1,4320))
         g=LinkeTurbidity[LatitudeIndex][LongitudeIndex]
         ApplyMonth=lambda x:g[x[0]-1]
         LT=pd.DataFrame(Time.month)
@@ -169,12 +169,12 @@ def pvl_clearsky_ineichen(Time,Location,LinkeTurbidity=-999):
     # Get the absolute airmass assuming standard local pressure (per
     # pvl_alt2pres) using Kasten and Young's 1989 formula for airmass.
 
-    AMabsolute=pvl_absoluteairmass.pvl_absoluteairmass(AMrelative=pvl_relativeairmass.pvl_relativeairmass(ApparentZenith,model='kastenyoung1989'),Pressure=pvl_alt2pres.pvl_alt2pres(var.Location.altitude))
+    AMabsolute=pvl_absoluteairmass.pvl_absoluteairmass(AMrelative=pvl_relativeairmass.pvl_relativeairmass(ApparentZenith,model='kastenyoung1989'),Pressure=pvl_alt2pres.pvl_alt2pres(var.Location['altitude']))
 
-    fh1=np.exp(var.Location.altitude*((- 1 / 8000)))
-    fh2=np.exp(var.Location.altitude*((- 1 / 1250)))
-    cg1=(5.09e-05*(var.Location.altitude) + 0.868)
-    cg2=3.92e-05*(var.Location.altitude) + 0.0387
+    fh1=np.exp(var.Location['altitude']*((- 1 / 8000)))
+    fh2=np.exp(var.Location['altitude']*((- 1 / 1250)))
+    cg1=(5.09e-05*(var.Location['altitude']) + 0.868)
+    cg2=3.92e-05*(var.Location['altitude']) + 0.0387
 
     #  Dan's note on the TL correction: By my reading of the publication on
     #  pages 151-157, Ineichen and Perez introduce (among other things) three

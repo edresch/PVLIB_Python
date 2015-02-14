@@ -15,7 +15,6 @@ from pvl_spa import pvl_spa
 from pvl_extraradiation import pvl_extraradiation
 from pvl_globalinplane import pvl_globalinplane
 from pvl_grounddiffuse import pvl_grounddiffuse
-from pvl_makelocationstruct import pvl_makelocationstruct
 from pvl_relativeairmass import pvl_relativeairmass
 from pvl_absoluteairmass import pvl_absoluteairmass
 from pvl_clearsky_ineichen import pvl_clearsky_ineichen
