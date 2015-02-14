@@ -46,7 +46,7 @@ System Modelling functions
 from pvl_physicaliam import pvl_physicaliam
 from pvl_ashraeiam import pvl_ashraeiam
 from pvl_calcparams_desoto import pvl_calcparams_desoto
-from pvl_retreiveSAM import pvl_retreiveSAM
+from pvl_retrieveSAM import pvl_retrieveSAM
 from pvl_sapm import pvl_sapm
 from pvl_sapmcelltemp import pvl_sapmcelltemp
 from pvl_singlediode import pvl_singlediode
