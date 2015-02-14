@@ -482,7 +482,7 @@ def calcparams_desoto(S, Tcell, alpha_isc, ModuleParameters, EgRef, dEgdT,
     pvl_sapm
     pvl_sapmcelltemp
     pvl_singlediode
-    pvl_retreivesam
+    pvl_retrievesam
 
 
     Notes
@@ -649,12 +649,12 @@ def getaoi(SurfTilt,SurfAz,SunZen,SunAz):
 
   return pd.DataFrame({'AOI':AOI})
 
-def retreiveSAM(name,FileLoc='none'):
+def retrieveSAM(name,FileLoc='none'):
     '''
     Retreive lastest module and inverter info from SAM website
 
     PVL_RETREIVESAM Retreive lastest module and inverter info from SAM website.
-    This function will retreive either:
+    This function will retrieve either:
 
         * CEC module database
         * Sandia Module database
@@ -687,14 +687,14 @@ def retreiveSAM(name,FileLoc='none'):
 
                 A DataFrame containing all the elements of the desired database. 
                 Each column representa a module or inverter, and a specific dataset
-                can be retreived by the command
+                can be retrieved by the command
 
                 >>> df.module_or_inverter_name
 
     Examples
     --------
 
-    >>> Invdb=SAM.pvl_retreiveSAM(name='SandiaInverter')
+    >>> Invdb=SAM.pvl_retrieveSAM(name='SandiaInverter')
     >>> inverter=Invdb.AE_Solar_Energy__AE6_0__277V__277V__CEC_2012_
     >>> inverter    
     Vac           277.000000
@@ -778,7 +778,7 @@ def sapm(Module,Eb,Ediff,Tcell,AM,AOI):
   Module : DataFrame
 
           A DataFrame defining the SAPM performance parameters (see
-          pvl_retreivesam)
+          pvl_retrievesam)
 
   Eb : float of DataFrame
 
@@ -834,7 +834,7 @@ def sapm(Module,Eb,Ediff,Tcell,AM,AOI):
   See Also
   --------
 
-  pvl_retreivesam
+  pvl_retrievesam
   pvl_sapmcelltemp 
   
   '''
@@ -1291,7 +1291,7 @@ def snlinverter(Inverter,Vmp,Pmp):
            inverter performance parameters according to the Sandia
            Grid-Connected Photovoltaic Inverter Model (SAND 2007-5036) [1]. A set of
            inverter performance parameters are provided with PV_LIB, or may be
-           generated from a System Advisor Model (SAM) [2] library using pvl_retreivesam. 
+           generated from a System Advisor Model (SAM) [2] library using pvl_retrievesam. 
            
             Required DataFrame components are:
 
